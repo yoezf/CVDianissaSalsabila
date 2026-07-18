@@ -158,6 +158,80 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 8000);
   };
 
+  // ---- Custom Cursor Glow (follows cursor, brightens on interactive elements) ----
+  const cursorGlow = document.getElementById('cursor-glow');
+  const cursorDot = document.getElementById('cursor-dot');
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isCoarsePointer = window.matchMedia('(pointer: coarse), (hover: none)').matches;
+
+  if (cursorGlow && cursorDot && !prefersReducedMotion && !isCoarsePointer) {
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let glowX = targetX;
+    let glowY = targetY;
+    let hasMoved = false;
+
+    window.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      cursorDot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+      if (!hasMoved) {
+        hasMoved = true;
+        cursorGlow.classList.add('is-active');
+        cursorDot.classList.add('is-active');
+      }
+    });
+
+    window.addEventListener('mouseleave', () => {
+      cursorGlow.classList.remove('is-active');
+      cursorDot.classList.remove('is-active');
+    });
+
+    // Smoothly trail the glow toward the cursor position
+    const animateGlow = () => {
+      glowX += (targetX - glowX) * 0.12;
+      glowY += (targetY - glowY) * 0.12;
+      cursorGlow.style.transform = `translate3d(${glowX}px, ${glowY}px, 0)`;
+      requestAnimationFrame(animateGlow);
+    };
+    requestAnimationFrame(animateGlow);
+
+    // Brighten/enlarge the glow over interactive elements
+    const hoverTargets = document.querySelectorAll(
+      'a, button, .btn-primary, .btn-secondary, .skill-cat-card, .port-card, .exp-card, .contact-card, input, textarea'
+    );
+    hoverTargets.forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        cursorGlow.classList.add('is-hover');
+        cursorDot.classList.add('is-hover');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursorGlow.classList.remove('is-hover');
+        cursorDot.classList.remove('is-hover');
+      });
+    });
+  } else if (cursorGlow && cursorDot) {
+    // Hide entirely when motion is reduced or on touch devices
+    cursorGlow.style.display = 'none';
+    cursorDot.style.display = 'none';
+  }
+
+  // ---- Subtle Magnetic Effect on Primary Buttons ----
+  if (!prefersReducedMotion && !isCoarsePointer) {
+    const magneticButtons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-submit');
+    magneticButtons.forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const relX = e.clientX - rect.left - rect.width / 2;
+        const relY = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${relX * 0.15}px, ${relY * 0.3}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  }
+
   // ---- Back to Top Button ----
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {

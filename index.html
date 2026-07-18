@@ -56,6 +56,10 @@
 </head>
 <body class="bg-cream font-sans text-navy antialiased overflow-x-hidden">
 
+<!-- CUSTOM CURSOR -->
+<div id="cursor-glow" class="cursor-glow" aria-hidden="true"></div>
+<div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
+
 <!-- NAVBAR -->
 <nav id="navbar" role="navigation" aria-label="Navigasi utama">
   <div class="nav-container">
@@ -151,8 +155,21 @@
         <div class="hero-image-glow" aria-hidden="true"></div>
         <div class="hero-image-ring1" aria-hidden="true"></div>
         <div class="hero-image-ring2" aria-hidden="true"></div>
+        <!-- Orbiting communication-channel icons via Remix Icon CDN and CSS Animation -->
+        <div class="comm-orbit-layer" aria-hidden="true">
+          <div class="comm-orbit-wrap orbit-a"><span class="comm-orbit-icon"><i class="ri-mail-line" aria-hidden="true"></i></span></div>
+          <div class="comm-orbit-wrap orbit-b"><span class="comm-orbit-icon"><i class="ri-phone-line" aria-hidden="true"></i></span></div>
+          <div class="comm-orbit-wrap orbit-c"><span class="comm-orbit-icon"><i class="ri-message-3-line" aria-hidden="true"></i></span></div>
+        </div>
         <div class="hero-image-frame">
-          <img src="./assets/images/profile.jpg" alt="Foto profil Dianissa Salsabila" class="hero-img" loading="eager" onerror="this.style.display='none';document.getElementById('hero-placeholder').style.display='flex'" />
+          <!-- Animated Communication Avatar via Remix Icon CDN and CSS Animation -->
+          <div class="communication-avatar-wrap">
+            <span class="comm-signal-ring s1" aria-hidden="true"></span>
+            <span class="comm-signal-ring s2" aria-hidden="true"></span>
+            <span class="comm-signal-ring s3" aria-hidden="true"></span>
+            <i class="ri-chat-voice-line communication-avatar-anim" aria-hidden="true"></i>
+          </div>
+          <div class="comm-typing-badge" aria-hidden="true"><span></span><span></span><span></span></div>
           <div id="hero-placeholder" class="hero-img-placeholder" style="display:none;">
             <span class="placeholder-initials">SA.</span>
             <span class="placeholder-name">Dianissa Salsabila</span>
