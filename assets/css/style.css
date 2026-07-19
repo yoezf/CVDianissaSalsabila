@@ -96,6 +96,12 @@ a { text-decoration: none; color: inherit; }
 .nav-logo span { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--cream); font-size: 14px; }
 .nav-name { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 16px; color: var(--navy); display: none; }
 @media(min-width:640px){ .nav-name { display: block; } }
+.nav-tagline-mobile {
+  display: block; font-family: 'Playfair Display', serif; font-size: 12px; font-weight: 500;
+  color: rgba(11,25,87,.55); white-space: nowrap; letter-spacing: .01em;
+}
+.nav-tagline-mobile em { font-style: italic; font-weight: 700; color: var(--navy); }
+@media(min-width:640px){ .nav-tagline-mobile { display: none; } }
 .nav-links { display: none; list-style: none; align-items: center; gap: 4px; }
 @media(min-width:1024px){ .nav-links { display: flex; } }
 .nav-link {
@@ -567,7 +573,7 @@ a { text-decoration: none; color: inherit; }
 }
 .edu-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
 .edu-card-inner { display: flex; align-items: flex-start; gap: 24px; }
-@media(max-width:540px){ .edu-card-inner { flex-direction: column; } }
+@media(max-width:640px){ .edu-card-inner { flex-direction: column; } }
 .edu-icon {
   width: 72px; height: 72px; border-radius: 20px; background: var(--navy);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -844,6 +850,26 @@ footer {
   .skill-cat-card { padding: 22px; }
   .cv-download-box { flex-wrap: wrap; }
   .footer-bottom { text-align: center; }
+
+  /* Experience card: title on top, workplace below, duration below that */
+  .exp-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .tl-date-mobile { margin-top: 2px; }
+
+  /* Education card: center icon and content for a balanced look */
+  .edu-card-inner { align-items: center; text-align: center; }
+  .edu-icon { margin: 0 auto; }
+  .edu-header { flex-direction: column; align-items: center; gap: 10px; }
+  .edu-inst, .edu-loc { justify-content: center; }
+  .edu-tags { justify-content: center; }
+  .edu-quote { text-align: center; }
+  .edu-quote-icon { left: 50%; transform: translateX(-50%); }
+  .edu-quote p { padding-left: 0; }
+
+  /* Section titles: fit on a single, evenly balanced line */
+  .section-title, .section-title-light { font-size: clamp(1.7rem, 7.5vw, 3rem); }
+}
+@media(max-width:380px){
+  .nav-tagline-mobile { font-size: 10.5px; }
 }
 @media(max-width:400px){
   .hero-title { font-size: clamp(2.1rem, 9vw, 2.6rem); }
